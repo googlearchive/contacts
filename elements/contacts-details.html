@@ -1,0 +1,99 @@
+<!--
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../components/polymer/polymer.html">
+
+<dom-module id="contacts-details">
+
+  <style>
+
+    contacts-details .header {
+      position: relative;
+      height: 320px;
+      background-color: #E3F2FD;
+    }
+
+    contacts-details .title {
+      position: absolute;
+      bottom: 24px;
+      left: 64px;
+      font-size: 46px;
+      color: #666;
+    }
+
+    contacts-details .item {
+      height: 80px;
+      cursor: pointer;
+    }
+
+    contacts-details .icon {
+      width: 64px;
+    }
+
+    contacts-details .item-line-1 {
+      line-height: 16px;
+      margin-top: 5px;
+      margin-bottom: 6px;
+    }
+
+    contacts-details .item-line-2 {
+      line-height: 13px;
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.4);
+    }
+
+    contacts-details .divider {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      margin-left: 64px;
+    }
+
+  </style>
+
+  <template>
+
+    <div class="header">
+      <div class="title">[[contact.name]]</div>
+    </div>
+
+    <div flex>
+      <template is="x-repeat" items="[[contact.info]]">
+        <div class="group">
+          <template is="x-repeat" items="[[item.items]]">
+            <div class="item" horizontal center layout>
+              <div class="icon"></div>
+              <div flex>
+                <div class="item-line-1">[[item.value]]</div>
+                <div class="item-line-2">[[item.type]]</div>
+              </div>
+            </div>
+          </template>
+          <div class="divider"></div>
+        </div>
+      </template>
+    </div>
+
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'contacts-details',
+
+    hostAttributes: 'vertical layout',
+
+    published: {
+      contact: Object
+    }
+
+  });
+
+</script>

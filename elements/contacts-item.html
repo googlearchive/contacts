@@ -1,0 +1,63 @@
+<!--
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../components/polymer/polymer.html">
+
+<dom-module id="contacts-item">
+
+  <style>
+
+    contacts-item .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-left: 24px;
+      background-color: #888;
+      background-size: cover;
+      background-position: 50%;
+    }
+
+    contacts-item .label {
+      padding: 0 16px;
+    }
+
+  </style>
+
+  <template>
+
+    <div class="avatar" style="[[avatarStyle]]"></div>
+    <div class="label">[[contact.name]]</div>
+
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'contacts-item',
+
+    hostAttributes: 'center horizontal layout',
+
+    published: {
+      contact: Object
+    },
+
+    computed: {
+      avatarStyle: 'computeAvatarStyle(contact)'
+    },
+
+    computeAvatarStyle: function(contact) {
+      return "background-image: url('" + contact.avatar + "');";
+    }
+
+  });
+
+</script>
