@@ -66,7 +66,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div class="bottom" flex></div>
         <core-icon class="bottom" icon="search"></core-icon>
       </core-toolbar>
-      <core-selector class="toolbar-divider" selected="{{selected}}" item="{{selectedItem}}" scroll flex>
+      <core-selector class="toolbar-divider" selected="{{selected}}" selected-item="{{selectedItem}}" scroll flex>
         <template is="x-repeat" items="[[contacts]]">
           <contacts-item class="list-item" contact="[[item]]"></contacts-item>
         </template>
