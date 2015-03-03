@@ -60,20 +60,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <template>
 
-    <div class="list-panel" vertical layout>
+    <div class="list-panel vertical layout">
       <core-toolbar class="toolbar medium-tall">
         <core-icon icon="menu"></core-icon>
-        <div class="bottom" flex></div>
+        <div class="bottom flex"></div>
         <core-icon class="bottom" icon="search"></core-icon>
       </core-toolbar>
-      <core-selector class="toolbar-divider" selected="{{selected}}" selected-item="{{selectedItem}}" scroll flex>
+      <core-selector class="toolbar-divider scroll flex" selected="{{selected}}" selected-item="{{selectedItem}}">
         <template is="x-repeat" items="[[contacts]]">
           <contacts-item class="list-item" contact="[[item]]"></contacts-item>
         </template>
       </core-selector>
     </div>
 
-    <div class="details-panel" relative flex vertical layout>
+    <div class="details-panel relative flex vertical layout">
       <core-toolbar class="toolbar medium-tall"></core-toolbar>
       <div class="toolbar-divider"></div>
       <div fit scroll>
@@ -81,7 +81,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </div>
     </div>
 
-    <core-ajax auto url="data/contacts.json" lastresponse="{{contacts}}"></core-ajax>
+    <core-ajax auto url="../data/contacts.json" lastresponse="{{contacts}}"></core-ajax>
 
   </template>
 
@@ -93,12 +93,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     is: 'contacts-app',
 
-    hostAttributes: 'horizontal layout',
-
     configure: function() {
       return {
         selected: 0
       }
+    },
+
+    ready: function() {
+      this.classList.add('horizontal', 'layout');
     }
 
   });

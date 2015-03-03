@@ -66,9 +66,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <template is="x-repeat" items="[[contact.info]]">
         <div class="group">
           <template is="x-repeat" items="[[item.items]]">
-            <div class="item" horizontal center layout>
+            <div class="item horizontal center layout">
               <div class="icon"></div>
-              <div flex>
+              <div class="flex">
                 <div class="item-line-1">[[item.value]]</div>
                 <div class="item-line-2">[[item.type]]</div>
               </div>
@@ -89,10 +89,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     is: 'contacts-details',
 
-    hostAttributes: 'vertical layout',
-
     published: {
       contact: Object
+    },
+
+    ready: function() {
+      this.classList.add('vertical', 'layout');
     }
 
   });
