@@ -14,13 +14,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <style>
 
-    contacts-details .header {
+    .header {
       position: relative;
       height: 320px;
       background-color: #E3F2FD;
     }
 
-    contacts-details .title {
+    .title {
       position: absolute;
       bottom: 24px;
       left: 64px;
@@ -28,28 +28,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       color: #666;
     }
 
-    contacts-details .item {
+    .item {
       height: 80px;
       cursor: pointer;
     }
 
-    contacts-details .icon {
+    .icon {
       width: 64px;
     }
 
-    contacts-details .item-line-1 {
+    .item-line-1 {
       line-height: 16px;
       margin-top: 5px;
       margin-bottom: 6px;
     }
 
-    contacts-details .item-line-2 {
+    .item-line-2 {
       line-height: 13px;
       font-size: 13px;
       color: rgba(0, 0, 0, 0.4);
     }
 
-    contacts-details .divider {
+    .divider {
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       margin-left: 64px;
     }
@@ -89,8 +89,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     is: 'contacts-details',
 
-    published: {
+    properties: {
+
       contact: Object
+
     },
 
     ready: function() {

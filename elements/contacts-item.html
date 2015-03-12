@@ -14,7 +14,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <style>
 
-    contacts-item .avatar {
+    .avatar {
       width: 40px;
       height: 40px;
       border-radius: 50%;
@@ -24,7 +24,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       background-position: 50%;
     }
 
-    contacts-item .label {
+    .label {
       padding: 0 16px;
     }
 
@@ -45,12 +45,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     is: 'contacts-item',
 
-    published: {
-      contact: Object
-    },
+    properties: {
 
-    computed: {
-      avatarStyle: 'computeAvatarStyle(contact)'
+      contact: Object,
+
+      avatarStyle: {
+        computed: 'computeAvatarStyle(contact)'
+      }
+
     },
 
     computeAvatarStyle: function(contact) {

@@ -10,7 +10,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../components/polymer/polymer.html">
 <link rel="import" href="../components/layout/layout.html">
 
+<link rel="import" href="../components/font-roboto/roboto.html">
 <link rel="import" href="../components/core-ajax/core-ajax.html">
+<link rel="import" href="../components/core-drawer-panel/core-drawer-panel.html">
+<link rel="import" href="../components/core-header-panel/core-header-panel.html">
 <link rel="import" href="../components/core-icons/core-icons.html">
 <link rel="import" href="../components/core-selector/core-selector.html">
 <link rel="import" href="../components/core-toolbar/core-toolbar.html">
@@ -22,31 +25,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <style>
 
-    contacts-app {
+    :host {
       font-family: RobotoDraft, sans-serif;
       background-color: #f5f5f5;
       color: #555;
     }
 
-    contacts-app .list-panel {
-      width: 380px;
-    }
-
-    contacts-app .toolbar {
+    .toolbar {
       background-color: transparent;
       border-bottom: 1px solid #dedede;
     }
 
-    contacts-app .toolbar-divider {
-      border-top: 1px solid #fff;
+    .list-panel {
+      background-color: #f5f5f5;
     }
 
-    contacts-app .list-item {
+    .list-item {
       height: 64px;
       cursor: pointer;
     }
 
-    contacts-app .details-card {
+    .details-card {
       position: absolute;
       top: 64px;
       left: 4px;
@@ -56,30 +55,47 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
     }
 
+    [narrow] .details-card {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      min-height: auto;
+    }
+
+    .back-button {
+      padding: 24px;
+    }
+
   </style>
 
   <template>
 
-    <div class="list-panel vertical layout">
-      <core-toolbar class="toolbar medium-tall">
-        <core-icon icon="menu"></core-icon>
-        <div class="bottom flex"></div>
-        <core-icon class="bottom" icon="search"></core-icon>
-      </core-toolbar>
-      <core-selector class="toolbar-divider scroll flex" selected="{{selected}}" selected-item="{{selectedItem}}">
-        <template is="x-repeat" items="[[contacts]]">
-          <contacts-item class="list-item" contact="[[item]]"></contacts-item>
-        </template>
-      </core-selector>
-    </div>
+    <core-drawer-panel id="drawerPanel" drawer-width="[[drawerWidth]]" on-core-responsive-change="onResponsiveChange">
 
-    <div class="details-panel relative flex vertical layout">
-      <core-toolbar class="toolbar medium-tall"></core-toolbar>
-      <div class="toolbar-divider"></div>
-      <div fit scroll>
-        <contacts-details class="details-card" contact="[[selectedItem.contact]]"></contacts-details>
-      </div>
-    </div>
+      <core-header-panel class="list-panel" drawer mode="seamed">
+
+        <core-toolbar class="toolbar medium-tall"></core-toolbar>
+
+        <core-selector selected="{{selected}}" selected-item="{{selectedItem}}">
+          <template is="x-repeat" items="[[contacts]]">
+            <contacts-item class="list-item" contact="[[item]]"></contacts-item>
+          </template>
+        </core-selector>
+
+      </core-header-panel>
+
+      <core-header-panel class="details-panel" main mode="cover">
+
+        <core-toolbar class="toolbar medium-tall"></core-toolbar>
+
+        <contacts-details class="details-card scroll" contact="[[selectedItem.contact]]"></contacts-details>
+        <core-icon class="back-button" icon="arrow-back" core-drawer-toggle></core-icon>
+
+      </core-header-panel>
+
+    </core-drawer-panel>
 
     <core-ajax auto url="../data/contacts.json" lastresponse="{{contacts}}"></core-ajax>
 
@@ -93,14 +109,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     is: 'contacts-app',
 
-    configure: function() {
-      return {
-        selected: 0
+    properties: {
+
+      selected: {
+        value: 0
+      },
+
+      drawerWidth: {
+        type: String,
+        value: '320px'
       }
     },
 
     ready: function() {
       this.classList.add('horizontal', 'layout');
+    },
+
+    onResponsiveChange: function(e, detail) {
+      this.drawerWidth = detail.narrow ? '100%' : '320px';
     }
 
   });
